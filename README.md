@@ -14,7 +14,7 @@ The project fetches video data, statistics, and comments using the YouTube Data 
 - [Methodology](#-methodology)
 - [Getting Started](#-getting-started)
 - [Usage](#-usage)
-- [Results](#-results)
+- [Results and Key Insights](#-results-and-key-insights)
 
 ---
 
@@ -48,12 +48,36 @@ The analysis is conducted in a Jupyter Notebook (`.ipynb`) and follows these mai
 ### Data Source
 The primary data source is the **YouTube Data API v3**. The analysis focuses on videos and comments related to smart fan brands.
 
+
 ### Share of Voice (SoV)
 SoV is a measure of a brand's market visibility. This project calculates it using these formulas:
+### 1. **Volume Share**
+Measures the percentage of total brand mentions attributable to the target brand.
 
--   **Volume Share**: The proportion of brand mentions relative to the total mentions of all competing brands
--   **Engagement Share**: A weighted score that accounts for user interaction, calculated based on views, likes, and comments.
--   **Positive Sentiment Share**: The percentage of positive comments for a brand compared to its total comments, indicating public perception.
+$$
+\text{SoV}_{\text{volume}} = \frac{\text{Brand Mentions}}{\text{Total Brand Mentions}} \times 100
+$$
+
+---
+
+### 2. **Engagement Share**
+A weighted score combining views, likes, and comments.
+
+$$
+\text{Engagement Score} = \text{Views} + (5 \times \text{Likes}) + (10 \times \text{Comments})
+$$
+
+---
+
+### 3. **Positive Sentiment Share**
+Percentage of brand comments that are positive.
+
+$$
+\text{SoV}_{\text{positive}} = \frac{\text{Positive Brand Comments}}{\text{Total Brand Comments}} \times 100
+$$
+
+---
+
 
 ### Keyword & Sentiment Analysis
 -   **Qdrant**: Comments are embedded and stored in a Qdrant vector database for efficient retrieval and analysis.
@@ -73,7 +97,7 @@ SoV is a measure of a brand's market visibility. This project calculates it usin
 
 ---
 
-## ⚙️ Usage
+##  Usage
 
 1.  **Add API Key**: Open the notebook and replace `"YOUR_API_KEY"` with your YouTube Data API key in the designated cell.
 2.  **Customize Brands**: If needed, modify the `brands` list to include other competitors you wish to analyze.
@@ -81,15 +105,19 @@ SoV is a measure of a brand's market visibility. This project calculates it usin
 
 ---
 
-## 📈 Results
+##  Results and Key Insights
 
-The final output of the project includes:
+The analysis of YouTube data provided a clear picture of the competitive landscape and consumer priorities in the smart fan market.
 
--   **Share of Voice DataFrames**: Tables showing the calculated SoV for each brand across different metrics.
--   **Visualizations**:
-    -   A grouped bar chart comparing the Volume, Engagement, and Positive Sentiment SoV for Atomberg and its competitors.
-    -   Bar charts detailing the frequency of top keywords discussed in comments.
-    -   A stacked bar chart showing the sentiment distribution (positive, neutral, negative) for each major keyword.
--   **Keyword Insights**: A list of the top technical and non-technical terms, revealing what features and issues are most important to consumers (e.g., `bldc fan`, `rpm`, `noise`, `air delivery`).
+### Share of Voice Dominance
+- **Atomberg leads the conversation**: Atomberg overwhelmingly dominates online discussions, securing **~74% of the volume share** from video mentions. This is significantly higher than its closest competitors, Havells (~9%) and Crompton (~8%).
+- **Engagement is sky-high**: The brand's dominance is even more pronounced in engagement, where it captures nearly **80% of the engagement share**. This indicates that content featuring Atomberg is highly interactive and viewed extensively.
+- **Sentiment shows opportunity**: While its overall sentiment is positive, Atomberg's positive sentiment share is slightly lower than competitors like Havells and Bajaj. This suggests that while the brand is popular, there is an opportunity to improve overall public perception and address negative feedback.
 
-These results provide valuable insights into brand performance, competitive standing, and consumer perception in the smart fan market.
+### Consumer Priorities and Keyword Analysis
+- **Focus on technology and performance**: Customer comments primarily revolve around core technical and purchasing factors. The most frequently discussed topics are **`bldc fan`**, **`price`**, **`rpm`**, and **`noise`** . This shows that consumers are well-informed and interested in the fan's technology, cost, and key performance metrics.
+- **Brand name is a key topic**: The term "Atomberg" itself is one of the most common keywords, highlighting strong brand recognition and direct discussion about the company.
+
+### Specific Product & Service Feedback
+- **Pain points revealed**: While overall sentiment for "bldc fan" is very positive, the analysis also uncovers specific customer issues.
+- **Actionable feedback**: Recurring themes in the comments provide direct feedback, including problems with the **`fan remote`** , questions about **`service`** , compatibility issues with a **`switch board`** , and reports of **`rubbing sound`** or defective fans. This data points to clear areas for product and customer service improvements.
